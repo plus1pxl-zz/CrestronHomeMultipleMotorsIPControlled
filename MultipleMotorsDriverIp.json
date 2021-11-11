@@ -1,0 +1,203 @@
+{
+    "CrestronSerialDeviceApi": {
+        "DeviceSupport": {
+        },
+        "DeviceSupport2": [
+        ],
+        "GeneralInformation": {
+            "DeviceType": "Controlled Motor",
+            "Manufacturer": "Generic",
+            "BaseModel": "Crestron Controlled Multiple Motors",
+            "VersionDate": "2021-01-22 16:04:04.000",
+            "DriverVersion": "1.0.000.1000",
+            "SdkVersion": "7.0.000.0012",
+            "Description": "3rd party controlled motor via Crestron processor or another IO TCP/IP controller",
+            "Guid": "1110210F-DC23-476F-8F11-DD0CA18E17DC",
+            "ExtensionDeviceData": {
+                "IsExtensionDevice": true,
+                "IsMediaDevice": false,
+                "IsMediaSource": false
+            },
+            "SupportedSeries": [
+                "Motor Series"
+            ],
+            "SupportedModels": [
+                "Crestron Controlled Multiple Motors",
+                "3rd Party Controlled Multiple Motors"
+            ]
+        },
+        "Api": {
+            "Communication": {
+                "CommunicationType": 1,
+                "Protocol": -1,
+                "Baud": -1,
+                "Parity": -1,
+                "HwHandshake": -1,
+                "SwHandshake": -1,
+                "DataBits": 0,
+                "StopBits": -1,
+                "Port": 5001,
+                "EnableAutoPolling": true,
+                "EnableAutoReconnect": true,
+                "TimeBetweenCommands": 250,
+                "ResponseTimeout": 3000,
+                "WaitForResponse": false,
+                "IpProtocol": 0,
+                "IsUserAdjustable": false,
+                "Authentication": {
+                    "Type": "None",
+                    "Required": false
+                },
+                "IsSecure": false,
+                "UserAdjustableProperties": [
+
+                ],
+                "DeviceId": 0
+            },
+            "CustomCommands": [
+                {
+                    "Name": "Open1",
+                    "Command": "OPEN-1"
+                },
+                {
+                    "Name": "Stop1",
+                    "Command": "STOP-1"
+                },
+                {
+                    "Name": "Close1",
+                    "Command": "CLOSE-1"
+                },
+                {
+                    "Name": "Open2",
+                    "Command": "OPEN-2"
+                },
+                {
+                    "Name": "Stop2",
+                    "Command": "STOP-2"
+                },
+                {
+                    "Name": "Close2",
+                    "Command": "CLOSE-2"
+                },
+                {
+                    "Name": "Open3",
+                    "Command": "OPEN-3"
+                },
+                {
+                    "Name": "Stop3",
+                    "Command": "STOP-3"
+                },
+                {
+                    "Name": "Close3",
+                    "Command": "CLOSE-3"
+                },
+                {
+                    "Name": "Open4",
+                    "Command": "OPEN-4"
+                },
+                {
+                    "Name": "Stop4",
+                    "Command": "STOP-4"
+                },
+                {
+                    "Name": "Close4",
+                    "Command": "CLOSE-4"
+                },
+                {
+                    "Name": "Open5",
+                    "Command": "OPEN-5"
+                },
+                {
+                    "Name": "Stop5",
+                    "Command": "STOP-5"
+                },
+                {
+                    "Name": "Close5",
+                    "Command": "CLOSE-5"
+                },
+                {
+                    "Name": "Open6",
+                    "Command": "OPEN-6"
+                },
+                {
+                    "Name": "Stop6",
+                    "Command": "STOP-6"
+                },
+                {
+                    "Name": "Close6",
+                    "Command": "CLOSE-6"
+                },
+                {
+                    "Name": "Open7",
+                    "Command": "OPEN-7"
+                },
+                {
+                    "Name": "Stop7",
+                    "Command": "STOP-7"
+                },
+                {
+                    "Name": "Close7",
+                    "Command": "CLOSE-7"
+                },
+                {
+                    "Name": "Open8",
+                    "Command": "OPEN-8"
+                },
+                {
+                    "Name": "Stop8",
+                    "Command": "STOP-8"
+                },
+                {
+                    "Name": "Close8",
+                    "Command": "CLOSE-8"
+                },
+                {
+                    "Name": "Toggle",
+                    "Command": "TOGGLE"
+                },
+                {
+                    "Name": "StatePoll",
+                    "Command": "STATUS"
+                },
+                {
+                    "Name": "AllClose",
+                    "Command": "CLOSE-ALL"
+                },
+                {
+                    "Name": "AllOpen",
+                    "Command": "OPEN-ALL"
+                }
+            ]
+        }
+        /*
+         "UserAttributes": [
+            {
+                "Label": "Open Feedback Icon",
+                "Description": "Enter icon name from available list of extension device icons.",
+                "ParameterId": "openIcon",
+                "TypeName": "Custom",
+                "RequiredForConnection": "None",
+                "Persistent": true,
+                "Data": {
+                    "DataType": "String",
+                    "DefaultValue": "icRemoteButtonGreen",
+                    "Mask": ""
+                }
+            },
+            {
+                "Label": "Close Feedback Icon",
+                "Description": "Enter icon name from available list of extension device icons.",
+                "ParameterId": "closeIcon",
+                "TypeName": "Custom",
+                "RequiredForConnection": "None",
+                "Persistent": true,
+                "Data": {
+                    "DataType": "String",
+                    "DefaultValue": "icRemoteButtonRed",
+                    "Mask": ""
+                }
+            }
+        ]
+        */
+    }
+}

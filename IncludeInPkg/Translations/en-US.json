@@ -1,0 +1,14 @@
+{
+    "MotorStateLabel": "State",
+    "StopLabel": "Stop",
+    "CloseLabel": "Closed",
+    "OpenLabel": "Open",
+    "ClosingLabel": "Closing...",
+    "OpeningLabel": "Opening...",
+    "ErrorLabel": "ERROR!!!",
+    "SettingsLabel": "Settings",
+    "SubHeaderScenes": "Scenes",
+    "SubHeaderControls": "Controls",
+    "AllOpenLabel": "All Open",
+    "AllCloseLabel": "All Close"
+}

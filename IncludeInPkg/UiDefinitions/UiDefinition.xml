@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<uidefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noLabelspaceSchemaLocation="https://prd-use-rad-assets.azurewebsites.net/ExtensionsSchemaDefinition_v1_0.xsd">
+	<version ver="1.0"/>
+
+	<tile icon="{MotorStateIcon}" secondaryicon="{}" status="{MotorState}" action="command:Toggle" navigation="show:MainPageMotors8" showinhomepage="#false" showinroompage="#true"/>
+
+	<layouts>
+
+		<layout id="MainPageMotors8">
+			<controls>
+				<subheader id="subHeaderSceneID" label="^SubHeaderScenes" />
+				<button id="buttonAllCloseID" icon="icShadesClosedDisabled" label="^AllCloseLabel" action="command:AllClose"/>
+				<button id="buttonAllOpenID" icon="icShadesOpen" label="^AllOpenLabel" action="command:AllOpen"/>
+				<subheader id="subHeaderControlID" label="^SubHeaderControls" />
+				<controlgroup>
+					<textdisplay id="textDisplayButtonsID1" title="{MotorName1}" line1label="{MotorStatus1}" />
+					<!-- This will be used to show what button was pressed-->
+					<buttongroup>
+						<button id="buttonDownID1" icon="#icArrowDown" action="command:Close1"/>
+						<button id="buttonSelectID1" label="^StopLabel" action="command:Stop1"/>
+						<button id="buttonUpID1" icon="#icArrowUp" action="command:Open1"/>
+					</buttongroup>
+					<textdisplay id="textDisplayButtonsID2" title="{MotorName2}" line1label="{MotorStatus2}" />
+					<!-- This will be used to show what button was pressed-->
+					<buttongroup>
+						<button id="buttonDownID2" icon="#icArrowDown" action="command:Close2"/>
+						<button id="buttonSelectID2" label="^StopLabel" action="command:Stop2"/>
+						<button id="buttonUpID2" icon="#icArrowUp" action="command:Open2"/>
+					</buttongroup>
+					<textdisplay id="textDisplayButtonsID3" title="{MotorName3}" line1label="{MotorStatus3}" />
+					<!-- This will be used to show what button was pressed-->
+					<buttongroup>
+						<button id="buttonDownID3" icon="#icArrowDown" action="command:Close3"/>
+						<button id="buttonSelectID3" label="^StopLabel" action="command:Stop3"/>
+						<button id="buttonUpID3" icon="#icArrowUp" action="command:Open3"/>
+					</buttongroup>
+					<textdisplay id="textDisplayButtonsID4" title="{MotorName4}" line1label="{MotorStatus4}" />
+					<!-- This will be used to show what button was pressed-->
+					<buttongroup>
+						<button id="buttonDownID4" icon="#icArrowDown" action="command:Close4"/>
+						<button id="buttonSelectID4" label="^StopLabel" action="command:Stop4"/>
+						<button id="buttonUpID4" icon="#icArrowUp" action="command:Open4"/>
+					</buttongroup>
+					<textdisplay id="textDisplayButtonsID5" title="{MotorName5}" line1label="{MotorStatus5}" />
+					<!-- This will be used to show what button was pressed-->
+					<buttongroup>
+						<button id="buttonDownID5" icon="#icArrowDown" action="command:Close5"/>
+						<button id="buttonSelectID5" label="^StopLabel" action="command:Stop5"/>
+						<button id="buttonUpID5" icon="#icArrowUp" action="command:Open5"/>
+					</buttongroup>
+					<textdisplay id="textDisplayButtonsID6" title="{MotorName6}" line1label="{MotorStatus6}" />
+					<!-- This will be used to show what button was pressed-->
+					<buttongroup>
+						<button id="buttonDownID6" icon="#icArrowDown" action="command:Close6"/>
+						<button id="buttonSelectID6" label="^StopLabel" action="command:Stop6"/>
+						<button id="buttonUpID6" icon="#icArrowUp" action="command:Open6"/>
+					</buttongroup>
+					<textdisplay id="textDisplayButtonsID7" title="{MotorName7}" line1label="{MotorStatus7}" />
+					<!-- This will be used to show what button was pressed-->
+					<buttongroup>
+						<button id="buttonDownID7" icon="#icArrowDown" action="command:Close7"/>
+						<button id="buttonSelectID7" label="^StopLabel" action="command:Stop7"/>
+						<button id="buttonUpID7" icon="#icArrowUp" action="command:Open7"/>
+					</buttongroup>
+					<textdisplay id="textDisplayButtonsID8" title="{MotorName8}" line1label="{MotorStatus8}" />
+					<!-- This will be used to show what button was pressed-->
+					<buttongroup>
+						<button id="buttonDownID8" icon="icArrowDown" action="command:Close8"/>
+						<button id="buttonSelectID8" label="^StopLabel" action="command:Stop8"/>
+						<button id="buttonUpID8" icon="icArrowUp" action="command:Open8"/>
+					</buttongroup>
+
+				</controlgroup>
+			</controls>
+		</layout>
+	</layouts>
+
+	<alerts>
+
+	</alerts>
+
+</uidefinition>
