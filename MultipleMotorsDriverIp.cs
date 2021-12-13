@@ -22,7 +22,7 @@ namespace MultipleMotorsGenericIP
 			ITcp
 	{
 		private const int PollingInterval = 60000;
-		private const int numberOfMotors = 8;
+		private const int NumberOfMotors = 8;
 
 		#region Commands
 
@@ -31,6 +31,7 @@ namespace MultipleMotorsGenericIP
 		private const string CloseCommand = "Close";
         private const string StopCommand = "Stop";
 		private const string ToggleCommand = "Toggle";
+        private const string DefaultMotorName = "Zone";
 
         #endregion
 
@@ -79,12 +80,23 @@ namespace MultipleMotorsGenericIP
             "MotorState6",
             "MotorState7",
             "MotorState8" };
-		#endregion
 
-		#region Translation Keys
+        private static readonly string[] MotorVisibilityKeys = {
+            "MotorVisible1",
+            "MotorVisible2",
+            "MotorVisible3",
+            "MotorVisible4",
+            "MotorVisible5",
+            "MotorVisible6",
+            "MotorVisible7",
+            "MotorVisible8" };
 
-		// Define all of the keys to be used for translations, these match the keys in the translation files
-		private const string MotorStateTranslationKey = "OnMotorStateLabel";
+        #endregion
+
+        #region Translation Keys
+
+        // Define all of the keys to be used for translations, these match the keys in the translation files
+        private const string MotorStateTranslationKey = "OnMotorStateLabel";
 
         #endregion
 
@@ -101,7 +113,7 @@ namespace MultipleMotorsGenericIP
 		private string _openIcon;
 		private string _closeIcon;
 
-        private Motor[] _motorEmulators = new Motor[numberOfMotors];
+        private Motor[] _motorEmulators = new Motor[NumberOfMotors];
         //private List<MotorEmulator> _motorEmulators = new List<MotorEmulator>()
         //{
         //    new MotorEmulator()
@@ -114,9 +126,10 @@ namespace MultipleMotorsGenericIP
 		private PropertyValue<string> _motorStateProperty;
 		private PropertyValue<string> _motorStateIconProperty;
 
-        private PropertyValue<string>[] _motorNamesPropertyValues = new PropertyValue<string>[numberOfMotors];
-        private PropertyValue<string>[] _motorStatusPropertyValues = new PropertyValue<string>[numberOfMotors];
-        private PropertyValue<bool>[] _motorStatePropertyValues = new PropertyValue<bool>[numberOfMotors];
+        private PropertyValue<string>[] _motorNamesPropertyValues = new PropertyValue<string>[NumberOfMotors];
+        private PropertyValue<string>[] _motorStatusPropertyValues = new PropertyValue<string>[NumberOfMotors];
+        private PropertyValue<bool>[] _motorStatePropertyValues = new PropertyValue<bool>[NumberOfMotors];
+        private PropertyValue<bool>[] _motorVisibilityPropertyValues = new PropertyValue<bool>[NumberOfMotors];
 
 		private PropertyValue<bool> _autoOffProperty;
 		private PropertyValue<int> _autoOffTimeProperty;
@@ -163,7 +176,7 @@ namespace MultipleMotorsGenericIP
 
 		protected override IOperationResult SetDriverPropertyValue<T>(string propertyKey, T value)
 		{
-            for (int i = 0; i < numberOfMotors; i++)
+            for (int i = 0; i < NumberOfMotors; i++)
             {
                 if (propertyKey == MotorStateKeys[i])
                 {
@@ -238,7 +251,7 @@ namespace MultipleMotorsGenericIP
 				_motorsProtocol.UserAttributeChanged += ProtocolAttributeChanged;
 				_motorsProtocol.FeedbackChanged += ProtocolFeedbackChanged;
 
-                for (int i = 0; i < numberOfMotors; i++)
+                for (int i = 0; i < NumberOfMotors; i++)
                 {
 					_motorEmulators[i] = new Motor();
                     _motorEmulators[i].StateChangedEvent += MotorEmulatorMotorStateChangedEvent;
@@ -264,7 +277,7 @@ namespace MultipleMotorsGenericIP
 		private void MotorDriverIpUserAttributesChanged(object sender, UserAttributeListEventArgs e)
 		{
 			if (_consoleDebuggingEnabled) CrestronConsole.PrintLine($"SetUserAttribute {sender.ToString()} to bool:{e.ToString()}");
-		}
+        }
 
 		#endregion
 
@@ -301,11 +314,10 @@ namespace MultipleMotorsGenericIP
 		#region Private Methods
 
 
-		// TODO: Bind all the properties
 		private void CreateDeviceDefinition()
 		{
 
-            for (int i = 0; i < numberOfMotors; i++)
+            for (int i = 0; i < NumberOfMotors; i++)
             {
                 _motorNamesPropertyValues[i] =
                     CreateProperty<string>(new PropertyDefinition(MotorNameKeys[i], null, DevicePropertyType.String));
@@ -315,7 +327,10 @@ namespace MultipleMotorsGenericIP
 
 				_motorStatePropertyValues[i] =
                     CreateProperty<bool>(new PropertyDefinition(MotorStateKeys[i], null, DevicePropertyType.Boolean));
-            }
+
+                _motorVisibilityPropertyValues[i] =
+                    CreateProperty<bool>(new PropertyDefinition(MotorVisibilityKeys[i], null, DevicePropertyType.Boolean));
+			}
 
 			// Define the state property
 			_motorStateProperty = CreateProperty<string>(
@@ -330,7 +345,7 @@ namespace MultipleMotorsGenericIP
 		/// </summary>
 		private void Refresh()
 		{
-            for (int i = 0; i < numberOfMotors; i++)
+            for (int i = 0; i < NumberOfMotors; i++)
             {
 				if (_motorEmulators[i] == null)
                     return;
@@ -340,7 +355,6 @@ namespace MultipleMotorsGenericIP
 		}
 
 
-		//TODO: add logic for the rest of motors
 		private object DoCommandThreadCallback(object userSpecific)
 		{
 			var doCommandObject = (DoCommandObject)userSpecific;
@@ -373,7 +387,6 @@ namespace MultipleMotorsGenericIP
 			return null;
 		}
 
-		//TODO: refactor
 		private void ProtocolFeedbackChanged(object sender, MotorsStatesEventArgs e)
 		{
 			foreach (var motorState in e.MotorsStates)
@@ -414,7 +427,7 @@ namespace MultipleMotorsGenericIP
 			var eventSender = (Motor)sender;
 			int motorEmulatorIndex = 0;
 
-            for (int i = 0; i < numberOfMotors; i++)
+            for (int i = 0; i < NumberOfMotors; i++)
             {
 				if (eventSender == _motorEmulators[i])
                 {
@@ -425,7 +438,6 @@ namespace MultipleMotorsGenericIP
             return motorEmulatorIndex;
         }
 
-		// TODO: add icon, state and status for each motor
 		//process feedback
 		private void SetMotorState(int motorEmulatorIndex, MotorState state)
         {
@@ -461,7 +473,7 @@ namespace MultipleMotorsGenericIP
             _motorStateIconProperty.Value = _closeIcon;
             _motorStateProperty.Value = CloseLabel;
 
-			for (int i = 0; i < numberOfMotors; i++)
+			for (int i = 0; i < NumberOfMotors; i++)
             {
                 if (_motorStatePropertyValues[i].Value)
                 {
@@ -494,9 +506,7 @@ namespace MultipleMotorsGenericIP
 				UserAttributeDataType.String,
 				"icShadesClosedDisabled");
 
-			var numberOfZones = 8;
-
-			for (int i = 1; i < numberOfZones + 1; i++)
+            for (int i = 1; i < NumberOfMotors + 1; i++)
 			{
 				AddUserAttribute(
 					UserAttributeType.Custom,
@@ -506,32 +516,45 @@ namespace MultipleMotorsGenericIP
 					true,
 					UserAttributeRequiredForConnectionType.None,
 					UserAttributeDataType.String,
-					$"Zone 0{i}");
+					$"{DefaultMotorName} {i}");
 			}
 
 			UpdateUserAttributes();
-		}
+            
+        }
 
-
-		private void UpdateUserAttributes()
+        private void UpdateUserAttributes()
 		{
 			var userAttributes = RetrieveUserAttributes();
 
-			var openIcon = userAttributes
-				.FirstOrDefault(x => x.ParameterId == "openIcon").Data.DefaultValue;
-			if (openIcon != "")
+			var openIconKeyValue = userAttributes
+				.FirstOrDefault(x => x.ParameterId == "openIcon");
+			if (openIconKeyValue != null)
 			{
-				_openIcon = openIcon;
-				if (_consoleDebuggingEnabled) CrestronConsole.PrintLine(openIcon);
+				_openIcon = openIconKeyValue.Data.DefaultValue;
+				if (_consoleDebuggingEnabled) CrestronConsole.PrintLine(_openIcon);
 			}
 
-			var closeIcon = userAttributes
-				.FirstOrDefault(x => x.ParameterId == "closeIcon").Data.DefaultValue;
-			if (closeIcon != "")
+			var closeIconKeyValue = userAttributes
+				.FirstOrDefault(x => x.ParameterId == "closeIcon");
+			if (closeIconKeyValue != null)
 			{
-				_closeIcon = closeIcon;
-				if (_consoleDebuggingEnabled) CrestronConsole.PrintLine(closeIcon);
+				_closeIcon = closeIconKeyValue.Data.DefaultValue;
+				if (_consoleDebuggingEnabled) CrestronConsole.PrintLine(_closeIcon);
 			}
+		}
+
+        private void SetMotorVisibility(int i, string attributeValue)
+        {
+            var userAttributes = RetrieveUserAttributes();
+
+            var defaultMotorName = $"{DefaultMotorName} {i + 1}";
+            string motorName = attributeValue;
+
+			_motorVisibilityPropertyValues[i].Value = (motorName == defaultMotorName) ? false : true;
+
+            //CrestronConsole.PrintLine($"motorName == defaultMotorName | _motorVisibilityPropertyValues[{i}].Value = {_motorVisibilityPropertyValues[i].Value}");
+
 		}
 
 		public object GetPropertyValue(object userAttribute, string propertyName)
@@ -549,7 +572,7 @@ namespace MultipleMotorsGenericIP
 			if (_consoleDebuggingEnabled) CrestronConsole.PrintLine("ConnectedChanged Event");
 			if (e != null)
 				Connected = e.Value;
-		}
+        }
 
 		protected virtual void ProtocolAttributeChanged(object driver, ValueEventArgs<string[]> e)
 		{
@@ -572,13 +595,18 @@ namespace MultipleMotorsGenericIP
 				}
 				else if (attributeId.Contains("MotorNameProperty"))
 				{
-                    for (int i = 0; i < numberOfMotors; i++)
+                    for (int i = 0; i < NumberOfMotors; i++)
                     {
-						if (attributeId == $"MotorNameProperty{i + 1}")
+                        if (attributeId == $"MotorNameProperty{i + 1}")
+                        {
                             _motorNamesPropertyValues[i].Value = attributeValue;
-					}
+
+                            SetMotorVisibility(i, attributeValue);
+						}
+                    }
                 }
 			}
+
 			Commit();
 		}
 		public static string ToLowerFirstChar(string input)

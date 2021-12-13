@@ -77,7 +77,7 @@
             if (connection == _isConnected) return;
             _isConnected = connection;
             base.ConnectionChanged(connection);
-            if (connection) Poll();
+            if (connection)Poll();
             // debugging
             if (_consoleDebuggingEnabled) CrestronConsole.PrintLine($"_isConnected field is set to:{_isConnected}");
         }
